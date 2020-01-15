@@ -10,14 +10,16 @@ const HEIGHT = IMG_HEIGHT - TOP_OFFSET;
 
 const STROKE_WIDTH = IMG_WIDTH / 400;
 const STROKE_OFFSET = 4 * STROKE_WIDTH;
-const FONT_SIZE = IMG_WIDTH / 60;
+const FONT_SIZE = IMG_WIDTH / 80;
 
-const ICON_SIZE = 0.04 * IMG_WIDTH;
+const ICON_SIZE = 0.015 * IMG_WIDTH;
 
 const BACKGROUND_COLOR = "#ffffffdd";
 const TEXT_COLOR = "#1D0F68";
 const CIRCLE_COLOR = "#3E21DE22";
 const ICON_COLOR = "#3E21DE";
+
+// if hidden part > 0.056 * width => this template, if smaller don't render the text
 
 export default function App() {
   return (
@@ -45,30 +47,26 @@ export default function App() {
           y1={TOP_OFFSET + STROKE_WIDTH / 2}
           x2={IMG_WIDTH}
           y2={TOP_OFFSET + STROKE_WIDTH / 2}
-          style={{
-            stroke: ICON_COLOR,
-            strokeWidth: STROKE_WIDTH,
-            strokeDasharray: `${STROKE_OFFSET} ${STROKE_OFFSET}`
-          }}
+          stroke={ICON_COLOR}
+          strokeWidth={STROKE_WIDTH}
+          strokeDasharray={`${STROKE_OFFSET} ${STROKE_OFFSET}`}
         />
 
         <circle
           cx={IMG_WIDTH / 2}
-          cy={TOP_OFFSET + IMG_WIDTH / 16 + ICON_SIZE / 2}
+          cy={TOP_OFFSET}
           r={ICON_SIZE}
-          fill={CIRCLE_COLOR}
+          fill="#fff"
           stroke={ICON_COLOR}
-          strokeWidth={STROKE_WIDTH}
+          strokeWidth={STROKE_WIDTH / 2}
         />
 
         <g
-          x="300"
-          y="300"
           clip-path="url(#lock-icon)"
           style={{
             transform: `translateX(${IMG_WIDTH / 2 -
-              ICON_SIZE / 2}px) translateY(${TOP_OFFSET +
-              IMG_WIDTH / 16}px) scale(${ICON_SIZE / 100})`
+              ICON_SIZE / 2}px) translateY(${TOP_OFFSET -
+              ICON_SIZE / 2}px) scale(${ICON_SIZE / 100})`
           }}
         >
           <path
@@ -83,30 +81,6 @@ export default function App() {
         <clipPath id="lock-icon">
           <rect width="100" height="100" fill="black" />
         </clipPath>
-
-        <text
-          x="50%"
-          y={TOP_OFFSET + IMG_WIDTH / 7 + FONT_SIZE}
-          dominant-baseline="middle"
-          text-anchor="middle"
-          fill={TEXT_COLOR}
-          fontWeight={100}
-          fontSize={FONT_SIZE}
-        >
-          The dimensions are limited for our FREE users.
-        </text>
-
-        <text
-          x="50%"
-          y={TOP_OFFSET + IMG_WIDTH / 7 + 2.7 * FONT_SIZE}
-          dominant-baseline="middle"
-          text-anchor="middle"
-          fill={TEXT_COLOR}
-          fontWeight={600}
-          fontSize={FONT_SIZE}
-        >
-          Upgrade to unlock the full image!
-        </text>
       </svg>
     </div>
   );
